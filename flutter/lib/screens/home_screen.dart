@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -236,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _buildQuickAccessCard('Messages', 'Stay in touch', Icons.chat_bubble),
                   _buildQuickAccessCard('Alerts & Reminders', 'View important alerts', Icons.notifications),
                   _buildQuickAccessCard('Appointments', 'Manage your visits', Icons.calendar_today),
-                  _buildQuickAccessCard('Hearing Support', 'Tools & resources', Icons.ear),
+                  _buildQuickAccessCard('Hearing Support', 'Tools & resources', Icons.earbuds),
                   _buildQuickAccessCard('Accessibility', 'Customize your\nexperience', Icons.accessibility),
                   _buildQuickAccessCard('Profile', 'Your information', Icons.person),
                 ],
