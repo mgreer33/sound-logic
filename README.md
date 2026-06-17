@@ -13,8 +13,11 @@ Zac completed the Help Center Screen, Home screen, and Accessibility Screen
 Rashaad completed the Login screen, sign up screen, and caregiver status screen
 Matthew completed the message screen, appointment screen, reminder screen, and profile screen. 
 
-AI was used rigorously for this project. The overwhelming majority of the code in this project was generated through AI tools including all the screens and all the tests. 
+AI was used rigorously for this project. The overwhelming majority of the code in this project was generated through AI tools including all the screens and all the tests.
 
+React/Flutter Comparison
+Using react vs flutter was an interesting experience. Flutter seems like a much more straight forward framework than react and was much easier to use in our teams experience than React. React seems a bit more robust and can go further than flutter however for the bounds of the project the team was able to complete everything very easily with flutter compared to having a mountain off issues using react.
+In the future if we were tasked for the same application again our team would choose to use flutter over react as it is a much simplaer and straight forward way to create all of the necessary screens for the project. 
 
 Zac Foss
 Rashaad Bell
