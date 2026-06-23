@@ -78,6 +78,24 @@ class AppointmentsScreen extends StatelessWidget {
             ),
           ),
 
+          //Screen reader
+          Semantics(
+              label: 'Read appointment details',
+              hint: 'Double tap to hear your appointment information aloud',
+              button: true,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // Add text-to-speech or other action here
+                },
+                icon: Icon(Icons.volume_up),
+                label: Text('Screen Reader'),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  minimumSize: Size(double.infinity, 50),
+                ),
+              ),
+            ),
+
           const SizedBox(height: 16),
 
           // Tabs

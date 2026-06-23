@@ -55,6 +55,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
+
             // Profile Card
             Container(
               padding: const EdgeInsets.all(16),
@@ -102,6 +103,20 @@ class ProfileScreen extends StatelessWidget {
                     child: const Text("Edit Profile"),
                   ),
                 ],
+              ),
+            ),
+
+            //Screen reader
+            Semantics(
+              label: 'Edit profile',
+              hint: 'Double tap to edit your profile information',
+              button: true,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // Your edit action
+                },
+                icon: Icon(Icons.edit),
+                label: Text('Edit Profile'),
               ),
             ),
 

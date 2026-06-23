@@ -161,12 +161,33 @@ class MessagesScreen extends StatelessWidget {
             ),
           ),
 
+          //Screen reader
+           Semantics(
+            label: 'Read latest message',
+            hint: 'Double tap to hear the most recent message aloud',
+            button: true,
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // Your action: e.g., text-to-speech
+                },
+                icon: Icon(Icons.volume_up),
+                label: Text('Screen Reader'),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                ),
+              ),
+            ),
+           ),
+
           // Accessibility footer
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: accentColor.withOpacity(0.1),
+              color: accentColor.withValues(alpha: 0.1),
             ),
             child: Row(
               children: [
@@ -262,7 +283,7 @@ class _MessageTile extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundColor: MessagesScreen.accentColor.withOpacity(0.2),
+            backgroundColor: MessagesScreen.accentColor.withValues(alpha: 0.2),
             child: const Icon(Icons.person, color: MessagesScreen.accentColor),
           ),
           const SizedBox(width: 12),
