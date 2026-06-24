@@ -122,12 +122,30 @@ class AlertsScreen extends StatelessWidget {
             ),
           ),
 
+          //Screen reader
+          Semantics(
+              label: 'Read alert message',
+              hint: 'Double tap to hear the alert message aloud',
+              button: true,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // Your action here (e.g., text-to-speech)
+                },
+                icon: Icon(Icons.volume_up),
+                label: Text('Screen Reader'),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  minimumSize: Size(double.infinity, 50),
+                ),
+              ),
+            ),
+
           // Footer
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: accentColor.withOpacity(0.1),
+              color: accentColor.withValues(alpha: 0.1),
             ),
             child: Row(
               children: [
