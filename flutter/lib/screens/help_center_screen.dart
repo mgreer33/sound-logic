@@ -11,25 +11,28 @@ class HelpCenterScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.menu, color: Color(0xFF2D8659)),
+          tooltip: 'Open navigation menu',
           onPressed: () {},
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                color: Color(0xFF2D8659),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Center(
-                child: Text(
-                  'CC',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
+            ExcludeSemantics(
+              child: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: Color(0xFF2D8659),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Text(
+                    'CC',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
@@ -51,25 +54,28 @@ class HelpCenterScreen extends StatelessWidget {
             children: [
               IconButton(
                 icon: Icon(Icons.notifications_outlined, color: Color(0xFF2D8659)),
+                tooltip: '3 unread notifications',
                 onPressed: () {},
               ),
-              Positioned(
-                right: 8,
-                top: 8,
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF2D8659),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '3',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+              ExcludeSemantics(
+                child: Positioned(
+                  right: 8,
+                  top: 8,
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF2D8659),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '3',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -113,17 +119,20 @@ class HelpCenterScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 16),
-                  Container(
-                    width: 120,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD4E8DC),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Icon(
-                      Icons.support_agent,
-                      size: 64,
-                      color: Color(0xFF2D8659),
+                  Semantics(
+                    label: 'Help center illustration',
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD4E8DC),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: const Icon(
+                        Icons.support_agent,
+                        size: 64,
+                        color: Color(0xFF2D8659),
+                      ),
                     ),
                   ),
                 ],
@@ -136,12 +145,16 @@ class HelpCenterScreen extends StatelessWidget {
                   color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'How can we help you?',
-                    prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(vertical: 12),
+                child: Semantics(
+                  label: 'Search help center',
+                  textField: true,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'How can we help you?',
+                      prefixIcon: ExcludeSemantics(child: Icon(Icons.search, color: Colors.grey[400])),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(vertical: 12),
+                    ),
                   ),
                 ),
               ),
@@ -196,13 +209,19 @@ class HelpCenterScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'View all >',
-                      style: TextStyle(
-                        color: Color(0xFF2D8659),
-                        fontWeight: FontWeight.w600,
+                  Semantics(
+                    label: 'View all popular topics',
+                    button: true,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: ExcludeSemantics(
+                        child: Text(
+                          'View all >',
+                          style: TextStyle(
+                            color: Color(0xFF2D8659),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -251,7 +270,7 @@ class HelpCenterScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.favorite_border, color: Color(0xFF2D8659), size: 28),
+                        ExcludeSemantics(child: Icon(Icons.favorite_border, color: Color(0xFF2D8659), size: 28)),
                         SizedBox(width: 12),
                         Expanded(
                           child: Column(
@@ -289,7 +308,7 @@ class HelpCenterScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.chat_outlined, color: Colors.white, size: 20),
+                          ExcludeSemantics(child: Icon(Icons.chat_outlined, color: Colors.white, size: 20)),
                           SizedBox(width: 8),
                           Text(
                             'Chat with Us',
@@ -375,15 +394,17 @@ class HelpCenterScreen extends StatelessWidget {
             icon: Stack(
               children: [
                 Icon(Icons.notifications),
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF2D8659),
-                      shape: BoxShape.circle,
+                ExcludeSemantics(
+                  child: Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF2D8659),
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
                 ),
@@ -412,27 +433,33 @@ class HelpCenterScreen extends StatelessWidget {
     required Color color,
     required Color iconColor,
   }) {
-    return Column(
-      children: [
-        Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Icon(icon, color: iconColor, size: 28),
+    return Semantics(
+      label: label.replaceAll('\n', ' '),
+      button: true,
+      child: ExcludeSemantics(
+        child: Column(
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: iconColor, size: 28),
+            ),
+            SizedBox(height: 8),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
-        SizedBox(height: 8),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
+      ),
     );
   }
 
@@ -442,40 +469,46 @@ class HelpCenterScreen extends StatelessWidget {
     required String subtitle,
     required Color iconColor,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey[200]!),
-      ),
-      padding: EdgeInsets.all(12),
-      child: Row(
-        children: [
-          Icon(icon, color: iconColor, size: 28),
-          SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
-                  ),
-                ),
-              ],
-            ),
+    return Semantics(
+      label: '$title. $subtitle',
+      button: true,
+      child: ExcludeSemantics(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[50],
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey[200]!),
           ),
-          Icon(Icons.chevron_right, color: Colors.grey[400]),
-        ],
+          padding: EdgeInsets.all(12),
+          child: Row(
+            children: [
+              Icon(icon, color: iconColor, size: 28),
+              SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right, color: Colors.grey[400]),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -485,50 +518,56 @@ class HelpCenterScreen extends StatelessWidget {
     required String readTime,
     required Color imageColor,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey[200]!),
-      ),
-      child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: 80,
-            decoration: BoxDecoration(
-              color: imageColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
+    return Semantics(
+      label: '${title.replaceAll('\n', ' ')}. $readTime',
+      button: true,
+      child: ExcludeSemantics(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[50],
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey[200]!),
+          ),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: imageColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                  ),
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    height: 1.3,
-                  ),
+              Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        height: 1.3,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      readTime,
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 8),
-                Text(
-                  readTime,
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.grey[600],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

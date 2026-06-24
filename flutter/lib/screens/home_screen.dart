@@ -18,12 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.menu, color: Colors.green),
+          tooltip: 'Open navigation menu',
           onPressed: () {},
         ),
         title: const Center(
           child: Image(
             image: AssetImage('assets/careconnect_logo.png'),
             height: 40,
+            semanticLabel: 'CareConnect logo',
           ),
         ),
         actions: [
@@ -31,23 +33,26 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               IconButton(
                 icon: const Icon(Icons.notifications_outlined, color: Colors.green),
+                tooltip: '3 unread notifications',
                 onPressed: () {},
               ),
-              Positioned(
-                right: 0,
-                top: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    '3',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+              ExcludeSemantics(
+                child: Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Text(
+                      '3',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -66,13 +71,18 @@ class _HomeScreenState extends State<HomeScreen> {
               // User greeting section
               Row(
                 children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Colors.purple[200],
-                    child: Icon(
-                      Icons.person,
-                      size: 40,
-                      color: Colors.purple[700],
+                  Semantics(
+                    label: "Sarah's profile picture",
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Colors.purple[200],
+                      child: ExcludeSemantics(
+                        child: Icon(
+                          Icons.person,
+                          size: 40,
+                          color: Colors.purple[700],
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -131,8 +141,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   FloatingActionButton(
                     mini: true,
                     backgroundColor: Colors.purple,
+                    tooltip: 'Edit profile',
                     onPressed: () {},
-                    child: const Icon(Icons.edit, color: Colors.white),
+                    child: const Icon(Icons.edit, color: Colors.white, semanticLabel: 'Edit'),
                   ),
                 ],
               ),
@@ -168,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.calendar_today, color: Colors.green[700], size: 24),
+                        ExcludeSemantics(child: Icon(Icons.calendar_today, color: Colors.green[700], size: 24)),
                         const SizedBox(width: 8),
                         const Text(
                           'Upcoming Appointment',
@@ -192,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        Icon(Icons.calendar_today, color: Colors.grey, size: 16),
+                        ExcludeSemantics(child: Icon(Icons.calendar_today, color: Colors.grey, size: 16)),
                         const SizedBox(width: 8),
                         const Text('May 15, 2025 • 10:00 AM', style: TextStyle(fontSize: 14)),
                       ],
@@ -200,24 +211,30 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        Icon(Icons.location_on, color: Colors.grey, size: 16),
+                        ExcludeSemantics(child: Icon(Icons.location_on, color: Colors.grey, size: 16)),
                         const SizedBox(width: 8),
                         const Text('Hearing Wellness Center', style: TextStyle(fontSize: 14)),
                       ],
                     ),
                     const SizedBox(height: 12),
                     Center(
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.green[700]!),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                      child: Semantics(
+                        label: 'View details for Hearing Check-Up appointment',
+                        button: true,
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: Colors.green[700]!),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          'View Details',
-                          style: TextStyle(color: Colors.green[700]),
+                          child: ExcludeSemantics(
+                            child: Text(
+                              'View Details',
+                              style: TextStyle(color: Colors.green[700]),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -243,38 +260,44 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 24),
               // Need Help section
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.favorite, color: Colors.red, size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Need help?',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF1B5E20),
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Contact your caregiver or access support resources.',
-                            style: TextStyle(fontSize: 13, color: Colors.grey),
-                          ),
-                        ],
-                      ),
+              Semantics(
+                label: 'Need help? Contact your caregiver or access support resources.',
+                button: true,
+                child: ExcludeSemantics(
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    Icon(Icons.chevron_right, color: Colors.grey),
-                  ],
+                    child: Row(
+                      children: [
+                        Icon(Icons.favorite, color: Colors.red, size: 28),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Need help?',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF1B5E20),
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'Contact your caregiver or access support resources.',
+                                style: TextStyle(fontSize: 13, color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(Icons.chevron_right, color: Colors.grey),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -319,72 +342,83 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildOverviewCard(String title, String subtitle, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Icon(icon, color: color, size: 32),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
+    return Semantics(
+      label: '$title: $subtitle',
+      child: ExcludeSemantics(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
           ),
-          const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: TextStyle(
-              fontSize: 12,
-              color: color,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildQuickAccessCard(String title, String subtitle, IconData icon) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[200]!),
-      ),
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, color: Colors.green[700], size: 32),
+              Icon(icon, color: color, size: 32),
               const SizedBox(height: 8),
               Text(
                 title,
-                textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 subtitle,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 10,
-                  color: Colors.grey,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: color,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuickAccessCard(String title, String subtitle, IconData icon) {
+    return Semantics(
+      label: '$title. $subtitle',
+      button: true,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[50],
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.grey[200]!),
+        ),
+        child: InkWell(
+          onTap: () {},
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: ExcludeSemantics(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, color: Colors.green[700], size: 32),
+                  const SizedBox(height: 8),
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

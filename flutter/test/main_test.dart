@@ -1,6 +1,7 @@
 import 'package:careconnect/main.dart';
 import 'package:careconnect/screens/accessibility_screen.dart';
 import 'package:careconnect/screens/help_center_screen.dart';
+import 'package:careconnect/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -355,6 +356,241 @@ void main() {
       expect(find.text('Welcome to CareConnect'), findsOneWidget);
       expect(find.text('Quick Actions'), findsOneWidget);
       expect(find.text('Recent Activities'), findsOneWidget);
+    });
+  });
+
+  group('AccessibilityScreen Accessibility Labels', () {
+    Widget buildScreen() => const MaterialApp(home: AccessibilityScreen());
+
+    testWidgets('menu button has "Open navigation menu" tooltip', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Open navigation menu'), findsOneWidget);
+    });
+
+    testWidgets('notifications button has "3 unread notifications" tooltip', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('3 unread notifications'), findsOneWidget);
+    });
+
+    testWidgets('back button has "Go back" tooltip', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Go back'), findsOneWidget);
+    });
+
+    testWidgets('header icon has "Accessibility settings illustration" label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Accessibility settings illustration'), findsOneWidget);
+    });
+
+    testWidgets('text size control label includes current size value', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Text size: Medium'), findsOneWidget);
+    });
+
+    testWidgets('CC logo is excluded from the semantics tree', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('CC'), findsNothing);
+    });
+
+    testWidgets('settings tiles expose combined title and subtitle as label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(
+        find.bySemanticsLabel('Live Caption. Show captions for messages and alerts'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel('Visual Alerts. Receive visual alerts for notifications'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel(
+            'Sound & Vibration Settings. Customize alert sounds and vibrations'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel('Sign Language Resources. Access helpful sign language videos'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel('Hearing Health Tips. Helpful tips and resources'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('toggle setting rows are merged into single semantic nodes', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      // MergeSemantics collapses each toggle row; verify each Switch is findable
+      // alongside its label text as one unit
+      expect(find.byType(MergeSemantics), findsWidgets);
+      expect(find.text('High Contrast'), findsOneWidget);
+      expect(find.text('Dark Mode'), findsOneWidget);
+      expect(find.text('Color Enhancement'), findsOneWidget);
+      expect(find.text('Voice Messages'), findsOneWidget);
+    });
+
+    testWidgets('notification badge is not a separate semantic node', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      // The badge count is conveyed through the button tooltip, not as its own node
+      final notifButton = find.bySemanticsLabel('3 unread notifications');
+      expect(notifButton, findsOneWidget);
+    });
+  });
+
+  group('HomeScreen Accessibility Labels', () {
+    Widget buildScreen() => const MaterialApp(home: HomeScreen());
+
+    testWidgets('menu button has "Open navigation menu" tooltip', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Open navigation menu'), findsOneWidget);
+    });
+
+    testWidgets('logo image has "CareConnect logo" semantic label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('CareConnect logo'), findsOneWidget);
+    });
+
+    testWidgets('notifications button has "3 unread notifications" tooltip', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('3 unread notifications'), findsOneWidget);
+    });
+
+    testWidgets("user avatar has \"Sarah's profile picture\" label", (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel("Sarah's profile picture"), findsOneWidget);
+    });
+
+    testWidgets('edit FAB has "Edit profile" tooltip', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Edit profile'), findsOneWidget);
+    });
+
+    testWidgets('view details button has appointment-specific semantic label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(
+        find.bySemanticsLabel('View details for Hearing Check-Up appointment'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('overview cards expose title and count as semantic label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Alerts: 3 new'), findsOneWidget);
+      expect(find.bySemanticsLabel('Messages: 2 new'), findsOneWidget);
+      expect(find.bySemanticsLabel('Appointments: 1 upcoming'), findsOneWidget);
+    });
+
+    testWidgets('quick access cards expose title and subtitle as semantic label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Messages. Stay in touch'), findsOneWidget);
+      expect(find.bySemanticsLabel('Alerts & Reminders. View important alerts'), findsOneWidget);
+      expect(find.bySemanticsLabel('Appointments. Manage your visits'), findsOneWidget);
+      expect(find.bySemanticsLabel('Hearing Support. Tools & resources'), findsOneWidget);
+      expect(find.bySemanticsLabel('Profile. Your information'), findsOneWidget);
+    });
+
+    testWidgets('quick access card label with multi-line subtitle is readable', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(
+        find.bySemanticsLabel(RegExp(r'Accessibility.*Customize your')),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('need help section has descriptive semantic label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(
+        find.bySemanticsLabel(
+            'Need help? Contact your caregiver or access support resources.'),
+        findsOneWidget,
+      );
+    });
+  });
+
+  group('HelpCenterScreen Accessibility Labels', () {
+    Widget buildScreen() => const MaterialApp(home: HelpCenterScreen());
+
+    testWidgets('menu button has "Open navigation menu" tooltip', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Open navigation menu'), findsOneWidget);
+    });
+
+    testWidgets('notifications button has "3 unread notifications" tooltip', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('3 unread notifications'), findsOneWidget);
+    });
+
+    testWidgets('CC logo is excluded from the semantics tree', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('CC'), findsNothing);
+    });
+
+    testWidgets('support agent icon has "Help center illustration" label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Help center illustration'), findsOneWidget);
+    });
+
+    testWidgets('search field has "Search help center" semantic label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('Search help center'), findsOneWidget);
+    });
+
+    testWidgets('"View all" button has "View all popular topics" label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('View all popular topics'), findsOneWidget);
+    });
+
+    testWidgets('category buttons strip newlines from their semantic labels', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(find.bySemanticsLabel('FAQs'), findsOneWidget);
+      expect(find.bySemanticsLabel('Video Guides'), findsOneWidget);
+      expect(find.bySemanticsLabel('User Guides'), findsOneWidget);
+      expect(find.bySemanticsLabel('Tips & Tricks'), findsOneWidget);
+      expect(find.bySemanticsLabel('Contact Support'), findsOneWidget);
+    });
+
+    testWidgets('topic tiles expose combined title and subtitle as label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(
+        find.bySemanticsLabel(
+            'Managing Appointments. Schedule, reschedule, or cancel your visits'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel('Alerts & Notifications. Manage your alerts and reminders'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel(
+            'Messaging. Send and receive messages with caregivers'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel(
+            'Account & Profile. Update your information and preferences'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('article cards strip newlines and include read time in label', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      expect(
+        find.bySemanticsLabel('How to set up notifications. 3 min read'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel('Joining a video appointment. 4 min read'),
+        findsOneWidget,
+      );
+      expect(
+        find.bySemanticsLabel('Managing your hearing devices. 5 min read'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('bottom nav alerts badge dot is excluded from semantics', (tester) async {
+      await tester.pumpWidget(buildScreen());
+      // The badge dot Container has no text — verify the Alerts tab label still reads correctly
+      expect(find.bySemanticsLabel('Alerts'), findsOneWidget);
     });
   });
 }

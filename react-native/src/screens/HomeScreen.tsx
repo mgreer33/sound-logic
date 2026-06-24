@@ -29,12 +29,17 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
     badge?: number,
     badgeColor?: string,
   ) => (
-    <TouchableOpacity style={styles.quickActionCard}>
+    <TouchableOpacity
+      style={styles.quickActionCard}
+      accessibilityLabel={`${title}. ${subtitle}`}
+      accessibilityRole="button"
+    >
       <View
         style={[
           styles.quickActionIconContainer,
           { backgroundColor: badgeColor || '#E8F4F1' },
         ]}
+        accessible={false}
       >
         {icon}
         {badge !== undefined && (
@@ -43,13 +48,14 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
               styles.quickActionBadge,
               { backgroundColor: badgeColor === '#F0E8F4' ? '#7C3AED' : '#1B6F4E' },
             ]}
+            accessible={false}
           >
-            <Text style={styles.badgeTextSmall}>{badge}</Text>
+            <Text style={styles.badgeTextSmall} accessible={false}>{badge}</Text>
           </View>
         )}
       </View>
-      <Text style={styles.quickActionTitle}>{title}</Text>
-      <Text style={styles.quickActionSubtitle}>{subtitle}</Text>
+      <Text style={styles.quickActionTitle} accessible={false}>{title}</Text>
+      <Text style={styles.quickActionSubtitle} accessible={false}>{subtitle}</Text>
     </TouchableOpacity>
   );
 
@@ -59,12 +65,16 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
     description: string,
     bgColor: string,
   ) => (
-    <TouchableOpacity style={styles.featureCard}>
-      <View style={[styles.featureIconContainer, { backgroundColor: bgColor }]}>
+    <TouchableOpacity
+      style={styles.featureCard}
+      accessibilityLabel={`${title}. ${description}`}
+      accessibilityRole="button"
+    >
+      <View style={[styles.featureIconContainer, { backgroundColor: bgColor }]} accessible={false}>
         {icon}
       </View>
-      <Text style={styles.featureTitle}>{title}</Text>
-      <Text style={styles.featureDescription}>{description}</Text>
+      <Text style={styles.featureTitle} accessible={false}>{title}</Text>
+      <Text style={styles.featureDescription} accessible={false}>{description}</Text>
     </TouchableOpacity>
   );
 
@@ -72,20 +82,28 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity>
-          <MaterialCommunityIcons name="menu" size={28} color="#1B6F4E" />
+        <TouchableOpacity
+          accessibilityLabel="Open navigation menu"
+          accessibilityRole="button"
+        >
+          <MaterialCommunityIcons name="menu" size={28} color="#1B6F4E" accessible={false} />
         </TouchableOpacity>
-        <View style={styles.headerCenter}>
+        <View style={styles.headerCenter} accessible={false}>
           <MaterialCommunityIcons
             name="check-circle"
             size={24}
             color="#1B6F4E"
+            accessible={false}
           />
-          <Text style={styles.headerTitle}>CareConnect</Text>
+          <Text style={styles.headerTitle} accessibilityRole="header">CareConnect</Text>
         </View>
-        <TouchableOpacity style={styles.notificationIcon}>
-          <Ionicons name="notifications" size={24} color="#1B6F4E" />
-          <View style={styles.headerBadge}>
+        <TouchableOpacity
+          style={styles.notificationIcon}
+          accessibilityLabel="3 unread notifications"
+          accessibilityRole="button"
+        >
+          <Ionicons name="notifications" size={24} color="#1B6F4E" accessible={false} />
+          <View style={styles.headerBadge} accessible={false}>
             <Text style={styles.headerBadgeText}>3</Text>
           </View>
         </TouchableOpacity>
@@ -96,25 +114,37 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
         <View style={styles.greetingSection}>
           <View style={styles.greetingContainer}>
             <View style={styles.avatarContainer}>
-              <View style={styles.avatar}>
-                <Text style={styles.avatarText}>S</Text>
+              <View
+                style={styles.avatar}
+                accessible={true}
+                accessibilityLabel="Sarah's profile picture"
+              >
+                <Text style={styles.avatarText} accessible={false}>S</Text>
               </View>
-              <TouchableOpacity style={styles.editButton}>
-                <MaterialCommunityIcons name="pencil" size={14} color="white" />
+              <TouchableOpacity
+                style={styles.editButton}
+                accessibilityLabel="Edit profile"
+                accessibilityRole="button"
+              >
+                <MaterialCommunityIcons name="pencil" size={14} color="white" accessible={false} />
               </TouchableOpacity>
             </View>
             <View style={styles.greetingText}>
               <Text style={styles.greetingTitle}>Hello, Sarah!</Text>
               <Text style={styles.greetingSubtitle}>Welcome back. You have</Text>
-              <View style={styles.alertsMessagesRow}>
-                <Text style={styles.alertsText}>
+              <View
+                style={styles.alertsMessagesRow}
+                accessible={true}
+                accessibilityLabel="3 new alerts and 2 new messages"
+              >
+                <Text style={styles.alertsText} accessible={false}>
                   <Text style={styles.alertsNumber}>3 new alerts</Text>
                 </Text>
-                <Text style={styles.andText}> and </Text>
-                <Text style={styles.messagesText}>
+                <Text style={styles.andText} accessible={false}> and </Text>
+                <Text style={styles.messagesText} accessible={false}>
                   <Text style={styles.messagesNumber}>2 new messages</Text>
                 </Text>
-                <Text style={styles.periodText}>.</Text>
+                <Text style={styles.periodText} accessible={false}>.</Text>
               </View>
             </View>
           </View>
@@ -128,8 +158,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
               size={20}
               color="#1B6F4E"
               style={styles.overviewIcon}
+              accessible={false}
             />
-            <Text style={styles.overviewTitle}>Today's Overview</Text>
+            <Text style={styles.overviewTitle} accessibilityRole="header">Today's Overview</Text>
           </View>
 
           <View style={styles.overviewCardsContainer}>
@@ -170,32 +201,46 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
               name="calendar-check"
               size={20}
               color="#1B6F4E"
+              accessible={false}
             />
-            <Text style={styles.appointmentTitle}>Upcoming Appointment</Text>
+            <Text style={styles.appointmentTitle} accessibilityRole="header">Upcoming Appointment</Text>
           </View>
 
           <View style={styles.appointmentCard}>
             <View style={styles.appointmentContent}>
               <Text style={styles.appointmentName}>Hearing Check-Up</Text>
-              <View style={styles.appointmentDetail}>
+              <View
+                style={styles.appointmentDetail}
+                accessible={true}
+                accessibilityLabel="Date and time: May 15, 2025 at 10:00 AM"
+              >
                 <MaterialCommunityIcons
                   name="calendar-outline"
                   size={16}
                   color="#666"
+                  accessible={false}
                 />
-                <Text style={styles.appointmentDetailText}>
+                <Text style={styles.appointmentDetailText} accessible={false}>
                   May 15, 2025 • 10:00 AM
                 </Text>
               </View>
-              <View style={styles.appointmentDetail}>
-                <MaterialCommunityIcons name="map-marker" size={16} color="#666" />
-                <Text style={styles.appointmentDetailText}>
+              <View
+                style={styles.appointmentDetail}
+                accessible={true}
+                accessibilityLabel="Location: Hearing Wellness Center"
+              >
+                <MaterialCommunityIcons name="map-marker" size={16} color="#666" accessible={false} />
+                <Text style={styles.appointmentDetailText} accessible={false}>
                   Hearing Wellness Center
                 </Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.viewDetailsButton}>
-              <Text style={styles.viewDetailsText}>View Details</Text>
+            <TouchableOpacity
+              style={styles.viewDetailsButton}
+              accessibilityLabel="View details for Hearing Check-Up appointment"
+              accessibilityRole="button"
+            >
+              <Text style={styles.viewDetailsText} accessible={false}>View Details</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -262,12 +307,18 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
         </View>
 
         {/* Need Help Card */}
-        <View style={styles.helpCard}>
-          <View style={styles.helpContent}>
+        <View
+          style={styles.helpCard}
+          accessible={true}
+          accessibilityLabel="Need help? Contact your caregiver or access support resources."
+          accessibilityRole="button"
+        >
+          <View style={styles.helpContent} accessible={false}>
             <MaterialCommunityIcons
               name="heart-multiple"
               size={24}
               color="#1B6F4E"
+              accessible={false}
             />
             <View style={styles.helpText}>
               <Text style={styles.helpTitle}>Need help?</Text>
@@ -276,7 +327,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
               </Text>
             </View>
           </View>
-          <MaterialCommunityIcons name="chevron-right" size={24} color="#1B6F4E" />
+          <MaterialCommunityIcons name="chevron-right" size={24} color="#1B6F4E" accessible={false} />
         </View>
 
         {/* Bottom Padding */}
@@ -284,21 +335,26 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
       </ScrollView>
 
       {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
+      <View style={styles.bottomNav} accessibilityRole="tabbar">
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => handleNavigation('home')}
+          accessibilityLabel="Home"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: activeTab === 'home' }}
         >
           <Ionicons
             name="home"
             size={24}
             color={activeTab === 'home' ? '#1B6F4E' : '#CCC'}
+            accessible={false}
           />
           <Text
             style={[
               styles.navLabel,
               activeTab === 'home' ? styles.navLabelActive : styles.navLabelInactive,
             ]}
+            accessible={false}
           >
             Home
           </Text>
@@ -307,11 +363,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => handleNavigation('messages')}
+          accessibilityLabel="Messages"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: activeTab === 'messages' }}
         >
           <MaterialCommunityIcons
             name="comment-multiple"
             size={24}
             color={activeTab === 'messages' ? '#1B6F4E' : '#CCC'}
+            accessible={false}
           />
           <Text
             style={[
@@ -320,6 +380,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
                 ? styles.navLabelActive
                 : styles.navLabelInactive,
             ]}
+            accessible={false}
           >
             Messages
           </Text>
@@ -328,17 +389,22 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => handleNavigation('alerts')}
+          accessibilityLabel="Alerts"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: activeTab === 'alerts' }}
         >
           <Ionicons
             name="notifications"
             size={24}
             color={activeTab === 'alerts' ? '#1B6F4E' : '#CCC'}
+            accessible={false}
           />
           <Text
             style={[
               styles.navLabel,
               activeTab === 'alerts' ? styles.navLabelActive : styles.navLabelInactive,
             ]}
+            accessible={false}
           >
             Alerts
           </Text>
@@ -347,11 +413,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => handleNavigation('appointments')}
+          accessibilityLabel="Appointments"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: activeTab === 'appointments' }}
         >
           <MaterialCommunityIcons
             name="calendar"
             size={24}
             color={activeTab === 'appointments' ? '#1B6F4E' : '#CCC'}
+            accessible={false}
           />
           <Text
             style={[
@@ -360,6 +430,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
                 ? styles.navLabelActive
                 : styles.navLabelInactive,
             ]}
+            accessible={false}
           >
             Appointments
           </Text>
@@ -368,11 +439,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => handleNavigation('profile')}
+          accessibilityLabel="Profile"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: activeTab === 'profile' }}
         >
           <MaterialCommunityIcons
             name="account-circle"
             size={24}
             color={activeTab === 'profile' ? '#1B6F4E' : '#CCC'}
+            accessible={false}
           />
           <Text
             style={[
@@ -381,6 +456,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
                 ? styles.navLabelActive
                 : styles.navLabelInactive,
             ]}
+            accessible={false}
           >
             Profile
           </Text>

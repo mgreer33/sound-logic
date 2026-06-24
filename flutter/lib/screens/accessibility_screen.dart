@@ -22,12 +22,14 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.menu, color: Color(0xFF2D8659)),
+          tooltip: 'Open navigation menu',
           onPressed: () {},
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            ExcludeSemantics(
+              child: Container(
               width: 30,
               height: 30,
               decoration: BoxDecoration(
@@ -44,6 +46,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                   ),
                 ),
               ),
+            ),
             ),
             SizedBox(width: 8),
             Text(
@@ -62,25 +65,28 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
             children: [
               IconButton(
                 icon: Icon(Icons.notifications_outlined, color: Color(0xFF2D8659)),
+                tooltip: '3 unread notifications',
                 onPressed: () {},
               ),
-              Positioned(
-                right: 8,
-                top: 8,
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF2D8659),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '3',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+              ExcludeSemantics(
+                child: Positioned(
+                  right: 8,
+                  top: 8,
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF2D8659),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        '3',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -101,6 +107,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                 children: [
                   IconButton(
                     icon: Icon(Icons.arrow_back, color: Color(0xFF2D8659), size: 28),
+                    tooltip: 'Go back',
                     onPressed: () {},
                     padding: EdgeInsets.zero,
                     constraints: BoxConstraints(),
@@ -131,17 +138,20 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                     ),
                   ),
                   SizedBox(width: 16),
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD4E4F8),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Icon(
-                      Icons.accessibility_new,
-                      size: 56,
-                      color: Color(0xFF2D8659),
+                  Semantics(
+                    label: 'Accessibility settings illustration',
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD4E4F8),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: const Icon(
+                        Icons.accessibility_new,
+                        size: 56,
+                        color: Color(0xFF2D8659),
+                      ),
                     ),
                   ),
                 ],
@@ -159,42 +169,47 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                 iconBgColor: Color(0xFF2D8659),
                 title: 'Text Size',
                 subtitle: 'Adjust the size of text throughout the app',
-                trailing: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey[300]!),
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'A',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w600,
-                        ),
+                trailing: Semantics(
+                  label: 'Text size: $textSize',
+                  child: ExcludeSemantics(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey[300]!),
+                        borderRadius: BorderRadius.circular(24),
                       ),
-                      SizedBox(width: 8),
-                      Text(
-                        textSize,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF2D8659),
-                          fontWeight: FontWeight.w600,
-                        ),
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'A',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            textSize,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF2D8659),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            'A',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color(0xFF2D8659),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 8),
-                      Text(
-                        'A',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Color(0xFF2D8659),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -328,14 +343,16 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                 padding: EdgeInsets.all(16),
                 child: Row(
                   children: [
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF2D8659),
-                        borderRadius: BorderRadius.circular(8),
+                    ExcludeSemantics(
+                      child: Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF2D8659),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(Icons.help, color: Colors.white, size: 24),
                       ),
-                      child: Icon(Icons.help, color: Colors.white, size: 24),
                     ),
                     SizedBox(width: 12),
                     Expanded(
@@ -404,15 +421,17 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
             icon: Stack(
               children: [
                 Icon(Icons.notifications),
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF2D8659),
-                      shape: BoxShape.circle,
+                ExcludeSemantics(
+                  child: Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF2D8659),
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
                 ),
@@ -454,50 +473,56 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
     required String subtitle,
     Widget? trailing,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[200]!),
-      ),
-      padding: EdgeInsets.all(12),
-      child: Row(
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: iconColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(icon, color: iconBgColor, size: 24),
+    return Semantics(
+      label: '$title. $subtitle',
+      button: trailing == null,
+      child: ExcludeSemantics(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[50],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey[200]!),
           ),
-          SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
+          padding: EdgeInsets.all(12),
+          child: Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: iconColor,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
-                  ),
+                child: Icon(icon, color: iconBgColor, size: 24),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              SizedBox(width: 12),
+              trailing ?? Icon(Icons.chevron_right, color: Colors.grey[400]),
+            ],
           ),
-          SizedBox(width: 12),
-          trailing ?? Icon(Icons.chevron_right, color: Colors.grey[400]),
-        ],
+        ),
       ),
     );
   }
@@ -510,56 +535,60 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
     required bool value,
     required Function(bool) onChanged,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[200]!),
-      ),
-      padding: EdgeInsets.all(12),
-      child: Row(
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(icon, color: iconColor, size: 24),
-          ),
-          SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
+    return MergeSemantics(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[50],
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.grey[200]!),
+        ),
+        padding: EdgeInsets.all(12),
+        child: Row(
+          children: [
+            ExcludeSemantics(
+              child: Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
-                  ),
-                ),
-              ],
+                child: Icon(icon, color: iconColor, size: 24),
+              ),
             ),
-          ),
-          SizedBox(width: 12),
-          Switch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: Color(0xFF2D8659),
-            inactiveThumbColor: Colors.grey[300],
-            inactiveTrackColor: Colors.grey[300],
-          ),
-        ],
+            SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 12),
+            Switch(
+              value: value,
+              onChanged: onChanged,
+              activeColor: Color(0xFF2D8659),
+              inactiveThumbColor: Colors.grey[300],
+              inactiveTrackColor: Colors.grey[300],
+            ),
+          ],
+        ),
       ),
     );
   }

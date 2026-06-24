@@ -49,8 +49,13 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
     toggleValue?: boolean,
     onToggleChange?: (value: boolean) => void,
   ) => (
-    <View style={styles.settingRow}>
-      <View style={styles.settingIconContainer}>{icon}</View>
+    <View
+      style={styles.settingRow}
+      accessible={!hasToggle}
+      accessibilityLabel={!hasToggle ? `${title}. ${description}` : undefined}
+      accessibilityRole={!hasToggle ? 'button' : undefined}
+    >
+      <View style={styles.settingIconContainer} accessible={false}>{icon}</View>
       <View style={styles.settingTextContainer}>
         <Text style={styles.settingTitle}>{title}</Text>
         <Text style={styles.settingDescription}>{description}</Text>
@@ -61,6 +66,10 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
           onValueChange={onToggleChange}
           trackColor={{ false: '#D0D0D0', true: '#1B6F4E' }}
           thumbColor={toggleValue ? '#1B6F4E' : '#F0F0F0'}
+          accessibilityLabel={title}
+          accessibilityHint={description}
+          accessibilityRole="switch"
+          accessibilityState={{ checked: toggleValue }}
         />
       )}
       {!hasToggle && (
@@ -68,6 +77,7 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
           name="chevron-right"
           size={24}
           color="#999"
+          accessible={false}
         />
       )}
     </View>
@@ -81,13 +91,22 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={onBack} style={styles.backButton}>
-          <MaterialCommunityIcons name="arrow-left" size={28} color="#1B6F4E" />
+        <TouchableOpacity
+          onPress={onBack}
+          style={styles.backButton}
+          accessibilityLabel="Go back"
+          accessibilityRole="button"
+        >
+          <MaterialCommunityIcons name="arrow-left" size={28} color="#1B6F4E" accessible={false} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>CC CareConnect</Text>
-        <TouchableOpacity style={styles.notificationBadge}>
-          <Ionicons name="notifications" size={24} color="#1B6F4E" />
-          <View style={styles.badge}>
+        <Text style={styles.headerTitle} accessibilityRole="header">CC CareConnect</Text>
+        <TouchableOpacity
+          style={styles.notificationBadge}
+          accessibilityLabel="3 unread notifications"
+          accessibilityRole="button"
+        >
+          <Ionicons name="notifications" size={24} color="#1B6F4E" accessible={false} />
+          <View style={styles.badge} accessible={false}>
             <Text style={styles.badgeText}>3</Text>
           </View>
         </TouchableOpacity>
@@ -97,11 +116,16 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
         {/* Title Section */}
         <View style={styles.titleSection}>
           <View style={styles.titleRow}>
-            <TouchableOpacity onPress={onBack}>
+            <TouchableOpacity
+              onPress={onBack}
+              accessibilityLabel="Go back"
+              accessibilityRole="button"
+            >
               <MaterialCommunityIcons
                 name="arrow-left"
                 size={28}
                 color="#1B6F4E"
+                accessible={false}
               />
             </TouchableOpacity>
             <Text style={styles.screenTitle}>Accessibility</Text>
@@ -112,19 +136,24 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
         </View>
 
         {/* Illustration */}
-        <View style={styles.illustrationContainer}>
-          <View style={styles.illustration}>
+        <View
+          style={styles.illustrationContainer}
+          accessible={true}
+          accessibilityLabel="Accessibility settings illustration"
+        >
+          <View style={styles.illustration} accessible={false}>
             <MaterialCommunityIcons
               name="volume-high"
               size={40}
               color="white"
               style={styles.illustrationIcon}
+              accessible={false}
             />
-            <Text style={styles.illustrationText}>🔊</Text>
+            <Text style={styles.illustrationText} accessible={false}>🔊</Text>
           </View>
-          <View style={[styles.illustration, styles.illustrationCircle]}>
-            <Text style={styles.illustrationText}>A</Text>
-            <Text style={styles.illustrationText}>A</Text>
+          <View style={[styles.illustration, styles.illustrationCircle]} accessible={false}>
+            <Text style={styles.illustrationText} accessible={false}>A</Text>
+            <Text style={styles.illustrationText} accessible={false}>A</Text>
           </View>
         </View>
 
@@ -151,17 +180,21 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
               <TouchableOpacity
                 style={styles.sizeButton}
                 onPress={() => handleTextSizeChange('small')}
+                accessibilityLabel="Set text size to small"
+                accessibilityRole="button"
               >
-                <Text style={styles.sizeButtonSmall}>A</Text>
+                <Text style={styles.sizeButtonSmall} accessible={false}>A</Text>
               </TouchableOpacity>
-              <View style={styles.sizeButtonMiddle}>
-                <Text style={styles.sizeButtonMedium}>Medium</Text>
+              <View style={styles.sizeButtonMiddle} accessible={true} accessibilityLabel="Current text size: Medium">
+                <Text style={styles.sizeButtonMedium} accessible={false}>Medium</Text>
               </View>
               <TouchableOpacity
                 style={styles.sizeButton}
                 onPress={() => handleTextSizeChange('large')}
+                accessibilityLabel="Set text size to large"
+                accessibilityRole="button"
               >
-                <Text style={styles.sizeButtonLarge}>A</Text>
+                <Text style={styles.sizeButtonLarge} accessible={false}>A</Text>
               </TouchableOpacity>
             </View>
 
@@ -321,11 +354,12 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
         {/* Support Card */}
         <View style={styles.supportCard}>
           <View style={styles.supportHeader}>
-            <View style={[styles.icon, { backgroundColor: '#1B6F4E' }]}>
+            <View style={[styles.icon, { backgroundColor: '#1B6F4E' }]} accessible={false}>
               <MaterialCommunityIcons
                 name="help-circle"
                 size={24}
                 color="white"
+                accessible={false}
               />
             </View>
             <View style={styles.supportTextContainer}>
@@ -337,13 +371,18 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.contactButton}>
+          <TouchableOpacity
+            style={styles.contactButton}
+            accessibilityLabel="Contact Support"
+            accessibilityRole="button"
+          >
             <MaterialCommunityIcons
               name="comment-multiple"
               size={18}
               color="white"
+              accessible={false}
             />
-            <Text style={styles.contactButtonText}>Contact Support</Text>
+            <Text style={styles.contactButtonText} accessible={false}>Contact Support</Text>
           </TouchableOpacity>
         </View>
 
@@ -352,34 +391,61 @@ const AccessibilityScreen: React.FC<AccessibilityScreenProps> = ({ onBack }) => 
       </ScrollView>
 
       {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="home" size={24} color="#CCC" />
-          <Text style={styles.navLabel}>Home</Text>
+      <View style={styles.bottomNav} accessibilityRole="tabbar">
+        <TouchableOpacity
+          style={styles.navItem}
+          accessibilityLabel="Home"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: false }}
+        >
+          <Ionicons name="home" size={24} color="#CCC" accessible={false} />
+          <Text style={styles.navLabel} accessible={false}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          accessibilityLabel="Messages"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: false }}
+        >
           <MaterialCommunityIcons
             name="comment-multiple"
             size={24}
             color="#CCC"
+            accessible={false}
           />
-          <Text style={styles.navLabel}>Messages</Text>
+          <Text style={styles.navLabel} accessible={false}>Messages</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="notifications" size={24} color="#CCC" />
-          <Text style={styles.navLabel}>Alerts</Text>
+        <TouchableOpacity
+          style={styles.navItem}
+          accessibilityLabel="Alerts"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: false }}
+        >
+          <Ionicons name="notifications" size={24} color="#CCC" accessible={false} />
+          <Text style={styles.navLabel} accessible={false}>Alerts</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialCommunityIcons name="calendar" size={24} color="#CCC" />
-          <Text style={styles.navLabel}>Appointments</Text>
+        <TouchableOpacity
+          style={styles.navItem}
+          accessibilityLabel="Appointments"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: false }}
+        >
+          <MaterialCommunityIcons name="calendar" size={24} color="#CCC" accessible={false} />
+          <Text style={styles.navLabel} accessible={false}>Appointments</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          accessibilityLabel="Profile"
+          accessibilityRole="tab"
+          accessibilityState={{ selected: true }}
+        >
           <MaterialCommunityIcons
             name="account-circle"
             size={24}
             color="#1B6F4E"
+            accessible={false}
           />
-          <Text style={styles.navLabelActive}>Profile</Text>
+          <Text style={styles.navLabelActive} accessible={false}>Profile</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
