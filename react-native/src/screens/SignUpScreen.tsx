@@ -17,20 +17,24 @@ type SignUpScreenProps = {
 };
 
 const SignUpScreen = ({onBack}: SignUpScreenProps) => {
-      const [fullName, setFullName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [communicationMethod, setCommunicationMethod] =
-  useState('Text');
-  const [hearingLevel, setHearingLevel] =
-  useState('Moderate');
+  const [communicationMethod, setCommunicationMethod] = useState('Text');
+  const [hearingLevel, setHearingLevel] = useState('Moderate');
  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <TouchableOpacity onPress={onBack} style={styles.backButton}>
+        <TouchableOpacity 
+          onPress={onBack} 
+          style={styles.backButton}
+          accessible={true}
+          accessibilityLabel="Back button"
+          accessibilityRole="button"
+        >
           <Text style={styles.backText}>←</Text>
         </TouchableOpacity>
 
@@ -46,34 +50,45 @@ const SignUpScreen = ({onBack}: SignUpScreenProps) => {
 
         <Text style={styles.label}>Full Name</Text>
         <TextInput
-            style={styles.input}
-            placeholder="e.g. Joyce Smith"
-            value={fullName}
-            onChangeText={setFullName}
+          style={styles.input}
+          placeholder="e.g. Joyce Smith"
+          value={fullName}
+          onChangeText={setFullName}
+          accessible={true}
+          accessibilityLabel="Full Name input field"
         />
 
+        <Text style={styles.label}>Email Address</Text>
         <TextInput
-            style={styles.input}
-            placeholder="you@example.com"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
+          style={styles.input}
+          placeholder="you@example.com"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          accessible={true}
+          accessibilityLabel="Email Address input field"
         />
 
+        <Text style={styles.label}>Password</Text>
         <TextInput
-            style={styles.input}
-            placeholder="At least 6 characters"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
+          style={styles.input}
+          placeholder="At least 6 characters"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          accessible={true}
+          accessibilityLabel="Password input field"
         />
 
+        <Text style={styles.label}>Confirm Password</Text>
         <TextInput
-            style={styles.input}
-            placeholder="Confirm your password"
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            secureTextEntry
+          style={styles.input}
+          placeholder="Confirm your password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry
+          accessible={true}
+          accessibilityLabel="Confirm Password input field"
         />
 
         <Text style={styles.sectionTitle}>Accessibility Preferences</Text>
@@ -83,63 +98,81 @@ const SignUpScreen = ({onBack}: SignUpScreenProps) => {
 
         <Text style={styles.smallLabel}>Preferred Communication Method</Text>
 
-<View style={styles.choiceRow}>
-  {[
-    {icon: '💬', label: 'Text'},
-    {icon: '👁', label: 'Visual Alerts'},
-    {icon: '📳', label: 'Vibration Alerts'},
-  ].map(item => (
-    <TouchableOpacity
-      key={item.label}
-      style={[
-        styles.choiceCard,
-        communicationMethod === item.label && styles.selectedCard,
-      ]}
-      onPress={() => setCommunicationMethod(item.label)}>
-      <Text style={styles.choiceIcon}>{item.icon}</Text>
-      <Text style={styles.choiceText}>{item.label}</Text>
-    </TouchableOpacity>
-  ))}
-</View>
+        <View style={styles.choiceRow}>
+          {[
+            {icon: '💬', label: 'Text'},
+            {icon: '👁', label: 'Visual Alerts'},
+            {icon: '📳', label: 'Vibration Alerts'},
+          ].map(item => (
+            <TouchableOpacity
+              key={item.label}
+              style={[
+                styles.choiceCard,
+                communicationMethod === item.label && styles.selectedCard,
+              ]}
+              onPress={() => setCommunicationMethod(item.label)}
+              accessible={true}
+              accessibilityLabel={`Preferred Communication Method: ${item.label}`}
+              accessibilityState={{ selected: communicationMethod === item.label }}
+            >
+              <Text style={styles.choiceIcon}>{item.icon}</Text>
+              <Text style={styles.choiceText}>{item.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
         <Text style={styles.smallLabel}>Hearing Support Level</Text>
 
-<View style={styles.levelRow}>
-  {['Mild', 'Moderate', 'Severe'].map(level => (
-    <TouchableOpacity
-      key={level}
-      style={[
-        styles.levelCard,
-        hearingLevel === level && styles.selectedCard,
-      ]}
-      onPress={() => setHearingLevel(level)}>
-      <Text style={styles.levelIcon}>👂</Text>
-      <Text style={styles.levelText}>{level}</Text>
-    </TouchableOpacity>
-  ))}
-</View>
+        <View style={styles.levelRow}>
+          {['Mild', 'Moderate', 'Severe'].map(level => (
+            <TouchableOpacity
+              key={level}
+              style={[
+                styles.levelCard,
+                hearingLevel === level && styles.selectedCard,
+              ]}
+              onPress={() => setHearingLevel(level)}
+              accessible={true}
+              accessibilityLabel={`Hearing Support Level: ${level}`}
+              accessibilityState={{ selected: hearingLevel === level }}
+            >
+              <Text style={styles.levelIcon}>👂</Text>
+              <Text style={styles.levelText}>{level}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
         <TouchableOpacity
-  style={styles.createButton}
-  onPress={() =>
-    setMessage(
-      validateSignUpForm({
-        fullName,
-        email,
-        password,
-        confirmPassword,
-   }) +
-      `\n\nCommunication: ${communicationMethod}\nHearing Level: ${hearingLevel}`,
-    )
-  }>
-  <Text style={styles.createButtonText}>Create Account</Text>
-</TouchableOpacity>
+          style={styles.createButton}
+          accessible={true}
+          accessibilityLabel="Create Account button"
+          accessibilityHint="Double tap to register your profile"
+          accessibilityRole="button"
+          onPress={() =>
+            setMessage(
+              validateSignUpForm({
+                fullName,
+                email,
+                password,
+                confirmPassword,
+              }) +
+              `\n\nCommunication: ${communicationMethod}\nHearing Level: ${hearingLevel}`,
+            )
+          }
+        >
+          <Text style={styles.createButtonText}>Create Account</Text>
+        </TouchableOpacity>
 
-{message ? <Text style={styles.messageText}>{message}</Text> : null}
+        {message ? <Text style={styles.messageText}>{message}</Text> : null}
 
         <View style={styles.divider} />
 
-        <TouchableOpacity onPress={onBack}>
+        <TouchableOpacity 
+          onPress={onBack}
+          accessible={true}
+          accessibilityLabel="Sign In link"
+          accessibilityRole="link"
+        >
           <Text style={styles.signInText}>
             Already have an account?{' '}
             <Text style={styles.signInLink}>Sign In</Text>
@@ -334,12 +367,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   messageText: {
-  textAlign: 'center',
-  color: colors.primaryGreen,
-  fontSize: 15,
-  fontWeight: '700',
-  marginBottom: 18,
-},
+    textAlign: 'center',
+    color: colors.primaryGreen,
+    fontSize: 15,
+    fontWeight: '700',
+    marginBottom: 18,
+  },
 });
 
 export default SignUpScreen;
