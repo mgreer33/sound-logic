@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CareConnect – Alerts & Reminders</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f7fb;
+      color: #1f2933;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #111827;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 16px;
+    }
+
+    .sidebar h1 {
+      font-size: 20px;
+      margin: 0 0 24px;
+    }
+
+    .nav-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .nav-item.active {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    .nav-item:hover {
+      background: #1f2937;
+    }
+
+    .main {
+      flex: 1;
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
+
+    .header-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border: 1px solid #e5e7eb;
+    }
+
+    .card-left {
+      max-width: 70%;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+    }
+
+    .badge-reminder {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .badge-alert {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .badge-medication {
+      background: #ecfdf5;
+      color: #15803d;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: #4b5563;
+      margin-bottom: 6px;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .card-time {
+      font-size: 12px;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+
+    .footer-link {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #2563eb;
+      cursor: pointer;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1>CareConnect</h1>
+    <div class="nav-item active">Home</div>
+    <div class="nav-item">Messages</div>
+    <div class="nav-item">Alerts</div>
+    <div class="nav-item">Appointments</div>
+    <div class="nav-item">Profile</div>
+  </div>
+
+  <div class="main">
+    <div class="header-title">Alerts &amp; Reminders</div>
+    <div class="header-subtitle">Stay informed and never miss what matters.</div>
+
+    <div class="filters">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Unread (3)</button>
+      <button class="filter-btn">Reminders</button>
+      <button class="filter-btn">Updates</button>
+    </div>
+
+    <div class="section-label">Today</div>
+
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-left">
+        <div class="badge badge-reminder">Reminder</div>
+        <div class="card-title">Hearing Check-Up Tomorrow</div>
+        <div class="card-text">You have an appointment tomorrow.</div>
+        <div class="card-meta">
+          May 15, 2025 | 10:00 AM | Hearing Wellness Center
+        </div>
+      </div>
+      <div class="card-time">9:30 AM</div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-left">
+        <div class="badge badge-alert">Alert</div>
+        <div class="card-title">New Message from Amy</div>
+        <div class="card-text">
+          Amy sent you a new message about your appointment.
+        </div>
+      </div>
+      <div class="card-time">9:30 AM</div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <div class="card-left">
+        <div class="badge badge-medication">Medication Reminder</div>
+        <div class="card-title">Take your medication</div>
+        <div class="card-text">
+          Don’t forget to take your medication.
+        </div>
+      </div>
+      <div class="card-time">8:00 PM</div>
+    </div>
+
+    <div class="footer-link">Manage your alert preferences</div>
+  </div>
+</body>
+</html>

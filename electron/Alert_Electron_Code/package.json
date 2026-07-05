@@ -1,0 +1,16 @@
+{
+  "name": "other-shoes-invent-5igns",
+  "productName": "other-shoes-invent-5igns",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "mgreer",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "41.1.1"
+  }
+}
