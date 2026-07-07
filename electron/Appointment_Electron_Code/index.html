@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CareConnect – Appointments</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #f5f7fb;
+      color: #1f2933;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h1 {
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+
+    .nav-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .nav-item.active {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .nav-item:hover {
+      background: #1f2937;
+    }
+
+    .main {
+      flex: 1;
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-title {
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .btn {
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .tab {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .tab.active {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .section-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-meta {
+      font-size: 14px;
+      color: #4b5563;
+      margin-bottom: 6px;
+    }
+
+    .card-address {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .status {
+      font-size: 13px;
+      font-weight: 600;
+      color: #15803d;
+    }
+
+    .calendar-link {
+      font-size: 13px;
+      color: #2563eb;
+      cursor: pointer;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h1>CareConnect</h1>
+    <div class="nav-item">Home</div>
+    <div class="nav-item">Messages</div>
+    <div class="nav-item">Alerts</div>
+    <div class="nav-item active">Appointments</div>
+    <div class="nav-item">Profile</div>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <div>
+        <div class="header-title">Appointments</div>
+        <div class="header-subtitle">View and manage your upcoming and past appointments.</div>
+      </div>
+      <div class="btn">Book Appointment</div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">Upcoming (2)</div>
+      <div class="tab">Past</div>
+      <div class="tab">Cancelled</div>
+    </div>
+
+    <div class="section-label">Upcoming Appointments</div>
+
+    <div class="card">
+      <div class="card-title">Hearing Check-Up</div>
+      <div class="card-meta">May 15, 2025 – 10:00 AM</div>
+      <div class="card-address">Hearing Wellness Center<br>123 Health St., Austin, TX 78701</div>
+      <div class="calendar-link">Add to Calendar</div>
+      <div class="status">Status: Confirmed</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Hearing Aid Follow-Up</div>
+      <div class="card-meta">Jun 5, 2025 – 2:00 PM</div>
+      <div class="card-address">Hearing Wellness Center<br>123 Health St., Suite 100, Austin, TX 78701</div>
+      <div class="calendar-link">Add to Calendar</div>
+      <div class="status">Status: Confirmed</div>
+    </div>
+
+    <div class="section-label">Past Appointments</div>
+
+    <div class="card">
+      <div class="card-title">Hearing Test</div>
+      <div class="card-meta">Apr 10, 2025 – 9:00 AM</div>
+      <div class="card-address">Hearing Wellness Center<br>123 Health St., Suite 100, Austin, TX 78701</div>
+      <div class="status">Status: Completed</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Hearing Test</div>
+      <div class="card-meta">Apr 10, 2025 – 9:00 AM</div>
+      <div class="card-address">Hearing Wellness Center<br>123 Health St., Suite 100, Austin, TX 78701</div>
+      <div class="status" style="color:#b91c1c;">Status: Cancelled</div>
+    </div>
+
+    <div class="section-label">Cancelled Appointments</div>
+    <div class="card">
+      <div class="card-meta">Need to reschedule or cancel?</div>
+      <div class="card-address">Please contact the clinic directly or visit our Help Center for more information.</div>
+    </div>
+  </div>
+</body>
+</html>

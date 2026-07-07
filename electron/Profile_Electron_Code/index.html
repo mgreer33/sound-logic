@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CareConnect – Profile</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #f5f7fb;
+      color: #1f2933;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h1 {
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+
+    .nav-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .nav-item.active {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .nav-item:hover {
+      background: #1f2937;
+    }
+
+    .main {
+      flex: 1;
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
+
+    .header-title {
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 4px;
+      margin-bottom: 20px;
+    }
+
+    .profile-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #d1d5db;
+      margin-right: 20px;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-name {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .profile-detail {
+      font-size: 14px;
+      color: #4b5563;
+      margin-top: 4px;
+    }
+
+    .edit-btn {
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .item-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .item-text {
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .logout {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #b91c1c;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h1>CareConnect</h1>
+    <div class="nav-item">Home</div>
+    <div class="nav-item">Messages</div>
+    <div class="nav-item">Alerts</div>
+    <div class="nav-item">Appointments</div>
+    <div class="nav-item active">Profile</div>
+  </div>
+
+  <div class="main">
+    <div class="header-title">My Profile</div>
+    <div class="header-subtitle">Manage your information and preferences.</div>
+
+    <div class="profile-card">
+      <div class="profile-img"></div>
+      <div class="profile-info">
+        <div class="profile-name">Sarah Johnson</div>
+        <div class="profile-detail">sarah.johnson@email.com</div>
+        <div class="profile-detail">(512) 555-1234</div>
+      </div>
+      <div class="edit-btn">Edit Profile</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Account & Security</div>
+
+      <div class="item">
+        <div class="item-title">Account Information</div>
+        <div class="item-text">Update your personal details</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Password & Security</div>
+        <div class="item-text">Change your password and security settings</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Sign In & Biometrics</div>
+        <div class="item-text">Manage how you sign in to your account</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Preferences</div>
+
+      <div class="item">
+        <div class="item-title">Notification Preferences</div>
+        <div class="item-text">Choose how and when you want to be notified</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Accessibility</div>
+        <div class="item-text">Customize text size, contrast, and more</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Language</div>
+        <div class="item-text">Choose your preferred language (English)</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Support & Resources</div>
+
+      <div class="item">
+        <div class="item-title">Help Center</div>
+        <div class="item-text">Get help and find answers</div>
+      </div>
+    </div>
+
+    <div class="logout">Sign out of your account</div>
+  </div>
+</body>
+</html>
